@@ -1,0 +1,13 @@
+.Score-container{
+    width : fit-content;
+    height: fit-content;
+    background-color: 	#7CFC00;
+    font-size: 25px;
+    font-weight: 900;
+    border-radius: 10px;
+    border: 3px solid black;
+    text-align: center;
+    color: purple;
+    padding : 10px;
+
+}

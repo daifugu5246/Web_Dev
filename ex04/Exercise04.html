@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <div id="maincontainer"></div>
+    <script>
+      const maincontainer = document.getElementById("maincontainer");
+      const colors = ['red', 'green', 'orange', 'blue','deeppink', 'purple'];
+      let index = 0;
+
+      /* Header */
+      let fstHeader = document.createElement("h2");
+      let fstHeader_text = document.createTextNode("Exercise 04: Javascript&DOM");
+      fstHeader.appendChild(fstHeader_text);
+      maincontainer.appendChild(fstHeader);
+
+      /* Button */
+      let buttonContainer = document.createElement("div");
+      let button = document.createElement("button");
+      let button_text = document.createTextNode(
+        "Click me to display Date and Time"
+      );
+
+      /* Worker */
+      let workerTime;
+      button.onclick = function () {
+        if (workerTime) {
+            workerTime.terminate();
+            workerTime = undefined;
+            button.style.position = "static";
+            button.style.color = "gainsboro";
+        } else {
+          let date;
+          let prevdate;
+          workerTime = new Worker("worker01.js");
+          workerTime.postMessage("dateRunning");
+          workerTime.onmessage = function (message) {
+            date = message.data.toString();
+            if (prevdate != date){
+                prevdate = date;
+                button.style.backgroundColor = colors[index];
+                index++;
+                if (index >= 6){
+                    index = 0;
+                }
+            }
+            button.innerHTML = date;
+            button.style.width = "fit-content";
+            button.style.color = "white";
+            button.style.position = "fixed";
+            button.style.top = "0px";
+            button.style.right = "0px";
+            button.style.border = "2px solid";
+            button.style.borderColor = "black";
+          }
+        }
+      };
+      button.appendChild(button_text);
+      buttonContainer.style.height = "20px";
+      buttonContainer.appendChild(button);
+      maincontainer.appendChild(buttonContainer);
+
+      /* Proflie info */
+      let a1 = document.createElement("a");
+      let p1 = document.createElement("p");
+      let p1_text = document.createTextNode("Personal Info");
+      a1.setAttribute("href", "#");
+      p1.appendChild(p1_text);
+      a1.style.color = "pink";
+      p1.style.width = "fit-content";
+      a1.appendChild(p1);
+      p1.onmouseover = function () {
+        a1.style.color = "blue";
+        p1.style.backgroundColor = "yellow";
+      };
+      p1.onmouseleave = function () {
+        a1.style.color = "pink";
+        p1.style.backgroundColor = "white";
+      };
+      let info = document.createElement("ul");
+      info.style.display = "none";
+      let infoList = [
+        "Patipat Koeddang, ID:64010475",
+        "Subject:Web Application Development",
+        "Semester:2",
+      ];
+      for (let i = 0; i < infoList.length; i++) {
+        let li = document.createElement("li");
+        li.innerHTML = infoList[i];
+        info.appendChild(li);
+      }
+      p1.onclick = function () {
+        if (info.style.display === "none") {
+          info.style.display = "block";
+        } else {
+          info.style.display = "none";
+        }
+      };
+      maincontainer.appendChild(a1);
+      maincontainer.appendChild(info);
+
+      /* Snapshots */
+      let scdHeader = document.createElement("h1");
+      let scd_text = document.createTextNode("Snapshots");
+      scdHeader.appendChild(scd_text);
+      maincontainer.appendChild(scdHeader);
+
+      /* Image list */
+      let unordered = document.createElement("ul");
+      maincontainer.appendChild(unordered);
+      lists = ["Fireworks", "Crest", "Action", "Buffalo"];
+      for (let i = 0; i < 4; i++) {
+        let list = document.createElement("li");
+        let list_txt = document.createElement("a");
+        list_txt.innerHTML = lists[i];
+        list.appendChild(list_txt);
+        list_txt.style.textDecoration = "underline";
+        list_txt.style.color = "blue";
+        list_txt.setAttribute("href", "#");
+        unordered.appendChild(list);
+        list_txt.onclick = function () {
+          switch (i) {
+            case 0:
+              image.setAttribute(
+                "src",
+                "https://ichef.bbci.co.uk/images/ic/1920x1080/p05lqc4f.jpg"
+              );
+              break;
+            case 1:
+              image.setAttribute(
+                "src",
+                "https://logos-world.net/wp-content/uploads/2020/06/Manchester-United-logo.png"
+              );
+              break;
+            case 2:
+              image.setAttribute(
+                "src",
+                "https://i.dawn.com/large/2023/02/63e94a9ef3875.gif"
+              );
+              break;
+            case 3:
+              image.setAttribute(
+                "src",
+                "https://static.thairath.co.th/media/HCtHFA7ele6Q2dUK4FxgD3hhx0BBZdTF9OElkQ7yEVlU9QUFZu9yvZcj1fmt8VDbOy.jpg"
+              );
+              break;
+          }
+        };
+      }
+      
+      /* Initial Image */
+      let image = document.createElement("img");
+      image.setAttribute(
+        "src",
+        "https://thestandard.co/wp-content/uploads/2023/01/NewJeans-omg-5.jpg"
+      );
+      image.style.width = "60rem";
+      maincontainer.appendChild(image);
+    </script>
+  </body>
+</html>

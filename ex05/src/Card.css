@@ -1,0 +1,29 @@
+.Card-container{
+    margin: auto;
+    padding: 20px;
+    width: 900px;
+    background-color: oldlace;
+    border: 3px solid black;
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.Card-section{
+    width: 70%;
+}
+.Card-img{
+    width: 30%;
+    height: 170px;
+    object-fit: cover;
+    object-position: 0;
+}
+.Vote-container{
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.Vote-container *{
+    margin: 10px;
+}
